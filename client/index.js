@@ -37,7 +37,7 @@ document.getElementById("start-mining").addEventListener('click', () => {
   fetch(request)
     .then(response => {
       return response.json();
-    }).then(({blockNumber}) => {
+    }).then(({ blockNumber }) => {
       alert(`Started @ block ${blockNumber}`);
     });
 });
@@ -52,7 +52,7 @@ document.getElementById("stop-mining").addEventListener('click', () => {
   fetch(request)
     .then(response => {
       return response.json();
-    }).then(({blockNumber}) => {
+    }).then(({ blockNumber }) => {
       alert(`Stopped @ block ${blockNumber}`);
     });
 });
