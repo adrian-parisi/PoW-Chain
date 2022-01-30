@@ -1,4 +1,4 @@
-const {utxos} = require('../db');
+const { utxos } = require('../db');
 
 class Transaction {
   constructor(inputs, outputs) {

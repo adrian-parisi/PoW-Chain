@@ -1,5 +1,6 @@
 const {startMining, stopMining} = require('./mine');
-const {PORT} = require('./config');
+const {getBalance} = require('./balance');
+const {PORT} = require('../config');
 const {utxos, blockchain} = require('./db');
 const express = require('express');
 const app = express();
@@ -17,18 +18,17 @@ app.post('/', (req, res) => {
       res.send({ blockNumber: blockchain.blockHeight() });
       return;
   }
+
   if(method === 'stopMining') {
       stopMining();
       res.send({ blockNumber: blockchain.blockHeight() });
       return;
   }
+
   if(method === "getBalance") {
       const [address] = params;
-      const ourUTXOs = utxos.filter(x => {
-        return x.owner === address && !x.spent;
-      });
-      const sum = ourUTXOs.reduce((p,c) => p + c.amount, 0);
-      res.send({ balance: sum.toString()});
+      const balance = getBalance(address);
+      res.send({ balance: balance.toString()});
   }
 });
 
